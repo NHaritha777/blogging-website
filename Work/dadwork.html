@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Khetra Padam Calculator</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #e0f7fa, #fff3e0);
+      padding: 40px;
+      color: #333;
+    }
+    .container {
+      max-width: 500px;
+      margin: auto;
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      color: #00796b;
+    }
+    label {
+      display: block;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+    input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    button {
+      margin-top: 25px;
+      width: 100%;
+      padding: 12px;
+      background-color: #00796b;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #004d40;
+    }
+    .output {
+      margin-top: 30px;
+      background-color: #f1f8e9;
+      padding: 20px;
+      border-radius: 8px;
+      font-size: 15px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Khetra Padam Calculator</h2>
+    <label for="length">Enter the length:</label>
+    <input type="number" id="length" step="any">
+
+    <label for="width">Enter the width:</label>
+    <input type="number" id="width" step="any">
+
+    <button onclick="calculate()">Calculate</button>
+
+    <div class="output" id="result"></div>
+  </div>
+
+  <script>
+    function calculate() {
+      const l = parseFloat(document.getElementById('length').value);
+      const b = parseFloat(document.getElementById('width').value);
+      const a = Math.floor((l * b) / 9);
+      let output = '';
+
+      if (a % 2 !== 0) {
+        output += `<strong>Khetra padam:</strong> ${a}<br>`;
+        const a1 = (a * 9) % 120;
+        output += `<strong>Aayush / age:</strong> ${a1}<br>`;
+
+        let a2 = (a * 9) % 8;
+        const l1 = [1, 3, 5, 7, 9];
+        if (l1.includes(a2)) {
+          output += `<strong>Good:</strong> ${a2}<br>`;
+        } else {
+          if (a2 === 0) a2 = 8.0;
+          output += `<strong>Bad:</strong> ${a2}<br>`;
+        }
+
+        let a3 = (a * 6) % 9;
+        const l3 = [0, 2, 3, 7, 8, 9];
+        if (a3 === 0) a3 = 9.0;
+        if (l3.includes(a3)) {
+          output += `<strong>Good:</strong> ${a3}<br>`;
+        } else {
+          output += `<strong>Bad:</strong> ${a3}<br>`;
+        }
+
+        let a4 = (a * 8) % 12;
+        let a5 = (a * 3) % 8;
+        if (a4 === 0.0) {
+          a4 = 12.0;
+          output += `<strong>Dhanam:</strong> ${a4}<br>`;
+        } else {
+          output += `<strong>Dhanam:</strong> ${a4}<br>`;
+        }
+        output += `<strong>Runam:</strong> ${a5}<br>`;
+        output += (a4 > a5) ? `<strong>GOOOOD</strong>` : `<strong>BAD</strong>`;
+      } else {
+        output += `<strong>Even:</strong> ${a}`;
+      }
+
+      document.getElementById('result').innerHTML = output;
+    }
+  </script>
+</body>
+</html>

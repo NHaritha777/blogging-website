@@ -1,0 +1,18 @@
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>My Webpage</title>
+        <style>
+            body {
+                background-image: url('Bg2.jpg');
+                background-repeat: no-repeat;
+                background-size: cover; 
+                background-attachment: fixed;
+            }
+        </style>
+    </head>
+    <body bgcolor='00072d'>
+		<p> <font color='ef476f'> This is login page </font color> </p>
+		<p> <font color='white'> This is login page </font color> </p>  
+    </body>
+    </html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>College Portal - Login/Signup</title>
+  <style>
+    *{box-sizing:border-box;font-family:Segoe UI, Tahoma, Arial;}
+    body{display:flex;align-items:center;justify-content:center;height:100vh;margin:0;background:#f0f2f5;}
+    .card{width:360px;padding:24px;background:#fff;border-radius:12px;box-shadow:0 6px 20px rgba(0,0,0,.08);}
+    input,select{width:100%;padding:10px;margin:8px 0;border-radius:8px;border:1px solid #ccc;}
+    button{width:100%;padding:12px;border:none;border-radius:8px;background:#4a90e2;color:#fff;font-weight:600;cursor:pointer;}
+    .toggle{margin-top:10px;text-align:center;}
+    .toggle a{color:#4a90e2;cursor:pointer;text-decoration:none;font-weight:600;}
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2 id="title">Sign In</h2>
+    <form id="authForm" method="POST" action="/login.php">
+      <div id="signupFields" style="display:none;">
+        <input name="name" placeholder="Full Name" />
+        <input name="department" placeholder="Department" />
+        <select name="year"><option value="">Year of Study</option><option>1st Year</option><option>2nd Year</option><option>3rd Year</option><option>4th Year</option></select>
+        <input name="section" placeholder="Section" />
+        <input name="roll" placeholder="Roll Number" />
+      </div>
+      <input name="username" placeholder="Username" required />
+      <input name="password" type="password" placeholder="Password" required />
+      <button type="submit" id="submitBtn">Sign In</button>
+    </form>
+    <div class="toggle">
+      <span id="toggleText">Don't have an account?</span>
+      <a id="toggleLink">Sign Up</a>
+    </div>
+  </div>
+
+  <script>
+    const toggleLink = document.getElementById('toggleLink');
+    const signupFields = document.getElementById('signupFields');
+    const form = document.getElementById('authForm');
+    const title = document.getElementById('title');
+    const submitBtn = document.getElementById('submitBtn');
+    const toggleText = document.getElementById('toggleText');
+    let isSignUp = false;
+
+    toggleLink.addEventListener('click', function(){
+      isSignUp = !isSignUp;
+      if(isSignUp){
+        signupFields.style.display = 'block';
+        form.action = '/signup.php';
+        title.textContent = 'Sign Up';
+        submitBtn.textContent = 'Sign Up';
+        toggleText.textContent = 'Already have an account?';
+        toggleLink.textContent = 'Sign In';
+      } else {
+        signupFields.style.display = 'none';
+        form.action = '/login.php';
+        title.textContent = 'Sign In';
+        submitBtn.textContent = 'Sign In';
+        toggleText.textContent = "Don't have an account?";
+        toggleLink.textContent = 'Sign Up';
+      }
+    });
+  </script>
+</body>
+</html>

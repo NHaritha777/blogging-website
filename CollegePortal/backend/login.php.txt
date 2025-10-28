@@ -1,0 +1,29 @@
+<?php
+// login.php
+session_start();
+include 'config.php';
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    header("Location: /frontend/index.html");
+    exit();
+}
+
+$username = $_POST['username'] ?? '';
+$password = $_POST['password'] ?? '';
+
+$stmt = $conn->prepare("SELECT id, password FROM users WHERE username = ?");
+$stmt->bind_param("s", $username);
+$stmt->execute();
+$stmt->store_result();
+if ($stmt->num_rows === 1) {
+    $stmt->bind_result($id, $hash);
+    $stmt->fetch();
+    if (password_verify($password, $hash)) {
+        $_SESSION['username'] = $username;
+        $_SESSION['user_id'] = $id;
+        header("Location: /chat.php");
+        exit();
+    }
+}
+echo "<script>alert('Invalid credentials'); window.history.back();</script>";
+$stmt->close();
+?>

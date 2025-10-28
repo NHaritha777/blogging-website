@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login </title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background: url('Bg2.jpg') no-repeat center center fixed;
+      background-size: cover;
+      position: relative;
+    }
+
+    /* Overlay for readability */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5); /* dark overlay */
+      z-index: -1;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 30px;
+      border-radius: 15px;
+      width: 350px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+      text-align: center;
+      transition: 0.3s;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      outline: none;
+    }
+
+    input:focus, select:focus {
+      border-color: #4a90e2;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      background: #4a90e2;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #357ab8;
+    }
+
+    .toggle {
+      margin-top: 15px;
+      font-size: 14px;
+    }
+
+    .toggle a {
+      color: #4a90e2;
+      cursor: pointer;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .signup-fields {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2 id="form-title">Sign In</h2>
+    <form id="authForm">
+      <!-- Signup Fields -->
+      <div class="signup-fields">
+        <input type="text" placeholder="Full Name" name="name" required>
+        <input type="text" placeholder="Department" name="department" required>
+        <select name="year" required>
+          <option value="">Year of Study</option>
+          <option value="1st Year">1st Year</option>
+          <option value="2nd Year">2nd Year</option>
+          <option value="3rd Year">3rd Year</option>
+          <option value="4th Year">4th Year</option>
+        </select>
+        <input type="text" placeholder="Section" name="section" required>
+        <input type="text" placeholder="Roll Number" name="roll" required>
+      </div>
+      <!-- Common Fields -->
+      <input type="text" placeholder="Username" name="username" required>
+      <input type="password" placeholder="Password" name="password" required>
+      <button type="submit" id="submitBtn">Sign In</button>
+    </form>
+    <div class="toggle">
+      <span id="toggleText">Don't have an account? </span>
+      <a id="toggleLink">Sign Up</a>
+    </div>
+  </div>
+
+  <script>
+    const toggleLink = document.getElementById('toggleLink');
+    const toggleText = document.getElementById('toggleText');
+    const formTitle = document.getElementById('form-title');
+    const signupFields = document.querySelector('.signup-fields');
+    const submitBtn = document.getElementById('submitBtn');
+
+    let isSignUp = false;
+
+    toggleLink.addEventListener('click', () => {
+      isSignUp = !isSignUp;
+      if (isSignUp) {
+        signupFields.style.display = 'block';
+        formTitle.textContent = 'Sign Up';
+        submitBtn.textContent = 'Sign Up';
+        toggleText.textContent = 'Already have an account? ';
+        toggleLink.textContent = 'Sign In';
+      } else {
+        signupFields.style.display = 'none';
+        formTitle.textContent = 'Sign In';
+        submitBtn.textContent = 'Sign In';
+        toggleText.textContent = "Don't have an account? ";
+        toggleLink.textContent = 'Sign Up';
+      }
+    });
+
+    // Form submission placeholder
+    document.getElementById('authForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (isSignUp) {
+        alert('✅ Account Created Successfully ');
+      } else {
+        alert('✅ Logged In Successfully ');
+      }
+    });
+  </script>
+</body>
+</html>
